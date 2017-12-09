@@ -174,7 +174,7 @@ function copy(){
 
 
 function enterPress(e){
-    if(e.keyCode == 13) main();
+    if(e.keyCode === 13) main();
 }
 
 function play(){
