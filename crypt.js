@@ -4,8 +4,8 @@ function main(){
     var a = document.getElementById("inForm");
     var key = a.elements[0].value;
     var input = a.elements[1].value;
-    let algType = document.getElementById("selectAlgType").value;
-    let x;
+    var algType = document.getElementById("selectAlgType").value;
+    var x;
     var audio = document.getElementById("audio");
 
     switch(algType){
@@ -53,9 +53,9 @@ function eldF(input){
         tmpValue = input.charCodeAt(i) - 97;
 
 
-        if(i != input.length){
+        if(i !== input.length){
             tmpValue2 = input.charCodeAt(i + 1) - 97;
-            if(tmpValue == 19 && tmpValue2 == 7){
+            if(tmpValue === 19 && tmpValue2 === 7){
                 tmpString += "ᚦ";
                 i++;
                 continue;
@@ -112,7 +112,7 @@ function rot13(input){
 
 function rotN(input, n){
 
-    if(n % 1 === 0 && n != null){
+    if(n % 1 === 0 && n !== null){
         var tmpString = "";
         var tmpValue;
         n = 26 % n;
