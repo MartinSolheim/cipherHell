@@ -7,11 +7,10 @@ function main(){
     var algType = document.getElementById("selectAlgType").value;
     var x;
     var audio = document.getElementById("audio");
+    var mode = document.getElementById("mode").value;
+    document.getElementById("infoBox").style.display = "none";
 
     switch(algType){
-        case "TEA":
-            x = tea(key, input);
-            print(x);
         case "ROT13":
             x = rot13(input);
             print(x);
@@ -21,12 +20,14 @@ function main(){
             print(x);
             break;
         case "ELDFUTHARK":
-            x = eldF(input);
-            print(x);
+            if(mode === "en") print(eldF(input));
+            else if(mode === "de") print(eldDe(input));
+            else print(input);
             break;
         case "FULLWIDTH":
-            x = fullW(input);
-            print(x);
+            if(mode === "en") print(fullW(input));
+            else if(mode === "de") print(fullWDe(input));
+            else print("lol, something went wrong");
             break;
         case "PRINT":
             print(input);
@@ -45,7 +46,7 @@ function eldF(input){
     var tmpValue;
     var tmpValue2;
     input = input.toLowerCase();
-    //0a ᚨ, 1b ᛒ, 2c ᚲ, 3d ᛞ, 4e ᛖ, 5f ᚠ, 6g ᚷ, 7h ᚻ, 8i ᛁ, 9j ᛃ, 10k ᚲ, 11l ᛚ, 12m ᛗ, 13n ᚾ, 14o ᛟ, 15p ᛈ, 16q ᚲ, 17r ᚱ, 18s ᛊ, 19t ᛏ, 20u ᚢ, 21v ᚹ, 22w ᚹ, 23x , 24y , 25z ᛉ, 26(th) ᚦ
+
 
     var eldFArray = ["ᚨ", "ᛒ", "ᚲ", "ᛞ", "ᛖ", "ᚠ", "ᚷ", "ᚻ", "ᛁ", "ᛃ", "ᚲ", "ᛚ", "ᛗ", "ᚾ", "ᛟ", "ᛈ", "ᚲ", "ᚱ", "ᛊ", "ᛏ", "ᚢ", "ᚹ", "ᚹ", "ᚲᛊ", "ᛁ", "ᛉ", "ᚦ"];
 
@@ -66,6 +67,43 @@ function eldF(input){
             tmpString += eldFArray[tmpValue];
         }else{
             tmpString += input.charAt(i);
+        }
+    }
+    return tmpString;
+}
+
+function eldDe(input){
+
+    /*
+    document.getElementById("infoBox").innerHTML = "Because the Elder Futhark alphabet only has 24 runes, several letters point to the same rune.\n" +
+                                                    "C, K, and Q all point to 'ᚲ', V and W point to 'ᚹ', and the 'th' sound points to a dedicated one - 'ᚦ'.\n" +
+                                                    "This makes a complete decipher really hard, so this will do.";
+
+    document.getElementById("infoBox").style.display("inherit");
+    */
+
+    var tmpString = "";
+    var tmpValue = "";
+    var tmpCharVal;
+
+    //0a ᚨ, 1b ᛒ, 2c ᚲ, 3d ᛞ, 4e ᛖ, 5f ᚠ, 6g ᚷ, 7h ᚻ, 8i ᛁ, 9j ᛃ, 10k ᚲ, 11l ᛚ, 12m ᛗ, 13n ᚾ, 14o ᛟ, 15p ᛈ, 16q ᚲ, 17r ᚱ, 18s ᛊ, 19t ᛏ, 20u ᚢ, 21v ᚹ, 22w ᚹ, 23x , 24y , 25z ᛉ, 26(th) ᚦ
+    var eldFArray = ["ᚨ", "ᛒ", "ᚲ", "ᛞ", "ᛖ", "ᚠ", "ᚷ", "ᚻ", "ᛁ", "ᛃ", "ᚲ", "ᛚ", "ᛗ", "ᚾ", "ᛟ", "ᛈ", "ᚲ", "ᚱ", "ᛊ", "ᛏ", "ᚢ", "ᚹ", "ᚹ", "ᚲᛊ", "ᛁ", "ᛉ", "ᚦ"];
+    var alphArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u,", "v", "w", "x", "y", "z", "th"];
+
+    for(var i = 0; i < input.length; i++){
+        tmpValue = input.charCodeAt(i);
+        if(tmpValue === 32){
+            tmpString += " ";
+            continue;
+        }
+
+
+        for(var j = 0; j < 26; j++) {
+            tmpCharVal = eldFArray[j].charCodeAt(0);
+            if (tmpValue === tmpCharVal) {
+                tmpString += alphArray[j];
+                break;
+            }
         }
     }
     return tmpString;
@@ -165,11 +203,25 @@ function fullW(input){
     return tmpString;
 }
 
+function fullWDe(input){
+    var tmpString = "";
+
+    for (var i = 0; i < input.length; i++){
+        tmpString += String.fromCharCode(input.charCodeAt(i) - 65248);
+
+    }
+    return tmpString;
+}
+
 
 function copy(){
-    var t = document.getElementById("output").value;
-    Copied = t.createTextRange();
-    Copied.execCommand("Copy");
+    var copyText = document.getElementById("output");
+    copyText.select();
+    document.execCommand("Copy");
+}
+
+function popup(text){
+
 }
 
 

@@ -12,7 +12,7 @@
 <div class="contentBefore" id="contentBefore"></div>
 <div class="content">
     <h1>cipherHell</h1>
-    <p>not much here yet. ill add more soon</p>
+    <p>not much here yet. ill add more soon <sup>TM</sup></p>
     <br>
 
     <form class="form" id="inForm">
@@ -24,6 +24,11 @@
     </form>
     <br>
 
+    <select id="mode">
+        <option value="en">Encipher</option>
+        <option value="de">Decipher</option>
+    </select>
+    <br>
     <select id="selectAlgType">
         <option value="ROT13">ROT13</option>
         <option value="ROTN">ROT N</option>
@@ -36,11 +41,11 @@
 
 
     <button onclick="main()">Submit</button>
-    <p id="infoBox"> heyhey</p>
+    <p id="infoBox"></p>
     <br><br>
     <textarea readonly id="output" rows="5" cols="50"> </textarea>
     <br>
-    <button onclick="copy()">Copy(doesnt work yet)</button>
+    <button onclick="copy()">Copy to clipboard</button>
     <br><br>
     <div id="music">
         <input type="button" value="feels" onclick="play()">

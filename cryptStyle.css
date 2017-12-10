@@ -1,10 +1,15 @@
 body{
     font-family: "verdana";
-    font-color: #f8f8ff;
+    color: #f8f8ff;
     font-size: large;
 }
 
 .contentBefore{
+    background-image: url('/resources/background.JPG');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: #595959;
     content: "";
     position: fixed;
     left: 0;
@@ -13,10 +18,6 @@ body{
     height: 100%;
     z-index: -1;
     display: block;
-    background-image: url('/resources/background.JPG');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     -webkit-animation: '';
     animation: '';
 }
@@ -35,7 +36,6 @@ body{
 
 .content{
     position: relative;
-    float: center;
     margin: auto;
     padding: 10px;
     width: 500px;
@@ -50,14 +50,19 @@ body{
 
 #infoBox{
     position: relative;
+    font-size: small;
+    z-index: -5;
+    float: right;
     display: none;
-    float: center;
-    margin: -15% 25% 0 30%;
+    margin: -20% 25% 0 30%;
     padding: 0% 0 15% 0;
+    width: 40%;
+    height: 40%;
+    border-color: black;
     outline-style: outset;
     outline-color: #d9d9d9;
-    background-color: #d9d9d9;
-    color: #333333
+    background-color: black;
+    color: ghostwhite;
 }
 
 .music{
