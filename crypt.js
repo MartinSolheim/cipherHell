@@ -88,7 +88,7 @@ function eldDe(input){
 
     //0a ᚨ, 1b ᛒ, 2c ᚲ, 3d ᛞ, 4e ᛖ, 5f ᚠ, 6g ᚷ, 7h ᚻ, 8i ᛁ, 9j ᛃ, 10k ᚲ, 11l ᛚ, 12m ᛗ, 13n ᚾ, 14o ᛟ, 15p ᛈ, 16q ᚲ, 17r ᚱ, 18s ᛊ, 19t ᛏ, 20u ᚢ, 21v ᚹ, 22w ᚹ, 23x , 24y , 25z ᛉ, 26(th) ᚦ
     var eldFArray = ["ᚨ", "ᛒ", "ᚲ", "ᛞ", "ᛖ", "ᚠ", "ᚷ", "ᚻ", "ᛁ", "ᛃ", "ᚲ", "ᛚ", "ᛗ", "ᚾ", "ᛟ", "ᛈ", "ᚲ", "ᚱ", "ᛊ", "ᛏ", "ᚢ", "ᚹ", "ᚹ", "ᚲᛊ", "ᛁ", "ᛉ", "ᚦ"];
-    var alphArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u,", "v", "w", "x", "y", "z", "th"];
+    var alphArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "th"];
 
     for(var i = 0; i < input.length; i++){
         tmpValue = input.charCodeAt(i);
