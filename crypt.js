@@ -22,7 +22,7 @@ function main(){
         case "ELDFUTHARK":
             if(mode === "en") print(eldF(input));
             else if(mode === "de") print(eldDe(input));
-            else print(input);
+            else print("lol, something went wrong.");
             break;
         case "FULLWIDTH":
             if(mode === "en") print(fullW(input));
@@ -153,7 +153,7 @@ function rotN(input, n){
     if(n % 1 === 0 && n !== null){
         var tmpString = "";
         var tmpValue;
-        n = 26 % n;
+        if(n > 26) n = n % 26;
         var t;
 
         for(var i = 0; i <= input.length; i++){
@@ -182,7 +182,6 @@ function rotN(input, n){
 function rot(charN, n, isLowerCase){
 
     var a = (isLowerCase) ? 122 : 90;
-
     for(var i = 0; i < n; i++){
         if(charN >= a) charN -= 25;
         else charN++;
