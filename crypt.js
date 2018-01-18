@@ -16,8 +16,12 @@ function main(){
             print(x);
             break;
         case "ROTN":
-            x = rotN(input,key);
-            print(x);
+            if(mode === "en") print(rotN(input, key, true));
+            else if(mode === "de") print(rotN(input, key, false));
+            break;
+        case "VIG":
+            if(mode === "en") print(vig(input, key, true));
+            else if(mode === "de") print(vig(input, key, false));
             break;
         case "ELDFUTHARK":
             if(mode === "en") print(eldF(input));
@@ -37,8 +41,16 @@ function main(){
     }
 }
 
-function tea(key, input){
+function vig(input, key, encrypt){
+    var alphLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    var alpUpper =  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
+    var tmpString = "";
+    var tmpValue;
+    var k = 0;
+    for(var i = 0; i < input.length; i++){
+
+    }
 }
 
 function eldF(input){
@@ -115,31 +127,32 @@ function rot13(input){
     var tmpValue;
 
     for(var i = 0; i < input.length; i++){
+        var c = input.charCodeAt(i);
 
         //if true, the char is lowercase
-        if(input.charCodeAt(i) >= 97 && input.charCodeAt(i) <= 122){
+        if(isLowerCase(c)){
 
         //checks if char ascii number is less than rotation number away from "z"
-            if(input.charCodeAt(i) >= 110){
-                tmpValue = input.charCodeAt(i) - 13;
+            if(c >= 110){
+                tmpValue = c - 13;
                 tmpString += String.fromCharCode(tmpValue);
             }
             else{
-                tmpValue = input.charCodeAt(i) + 13;
+                tmpValue = c + 13;
                 tmpString += String.fromCharCode(tmpValue);
             }
         }
 
         //if true, the char is uppercase
-        else if(input.charCodeAt(i) >= 65 && input.charCodeAt(i) <= 90){
+        else if(isUpperCase(c)){
 
             //checks if char ascii number is less than rotation number away from "Z"
-            if(input.charCodeAt(i) >= 78){
-                tmpValue = input.charCodeAt(i) - 13;
+            if(c >= 78){
+                tmpValue = c - 13;
                 tmpString += String.fromCharCode(tmpValue);
             }
             else{
-                tmpValue = input.charCodeAt(i) + 13;
+                tmpValue = c + 13;
                 tmpString += String.fromCharCode(tmpValue);
             }
         }
@@ -148,27 +161,33 @@ function rot13(input){
     return tmpString;
 }
 
-function rotN(input, n){
+
+
+function rotN(input, n, encrypt){
 
     if(n % 1 === 0 && n !== null){
         var tmpString = "";
         var tmpValue;
         if(n > 26) n = n % 26;
+        if(!encrypt) n = -n;
         var t;
+        var c;
 
-        for(var i = 0; i <= input.length; i++){
+        for(var i = 0; i < input.length; i++){
+
+            c = input.charCodeAt(i);
 
             //if true, the char is lowercase
-            if(input.charCodeAt(i) >= 97 && input.charCodeAt(i) <= 122){
+            if(isLowerCase(c)){
 
-                tmpValue = input.charCodeAt(i);
+                tmpValue = c;
                 t = rot(tmpValue, n, true);
                 tmpString += String.fromCharCode(t);
             }
             //if true, the char is uppercase
-            else if(input.charCodeAt(i) >= 65 && input.charCodeAt(i) <= 90){
+            else if(isUpperCase(c)){
 
-                tmpValue = input.charCodeAt(i);
+                tmpValue = c;
                 t = rot(tmpValue, n, false);
                 tmpString += String.fromCharCode(t);
             }
@@ -179,13 +198,25 @@ function rotN(input, n){
     return tmpString;
 }
 
-function rot(charN, n, isLowerCase){
+function rot(charN, n, lowerC){
 
-    var a = (isLowerCase) ? 122 : 90;
-    for(var i = 0; i < n; i++){
-        if(charN >= a) charN -= 25;
-        else charN++;
+    var i = 0;
+    var a = 0;
+
+    if(n > 0){
+        a = (lowerC) ? 122 : 90;
+        for( ; i < n; i++){
+            if(charN >= a) charN -= 25;
+            else charN++;
+        }
+    }else{
+        a = (lowerC) ? 97 : 65;
+        for( ; i > n; i--){
+            if(charN <= a) charN += 25;
+            else charN--;
+        }
     }
+
     return charN;
 }
 
@@ -212,6 +243,15 @@ function fullWDe(input){
     return tmpString;
 }
 
+function isUpperCase(c){
+    if(c >= 65 && c <= 90) return true;
+    else return false;
+}
+
+function isLowerCase(c){
+    if(c >= 97 && c <= 122) return true;
+    else return false;
+}
 
 function copy(){
     var copyText = document.getElementById("output");
