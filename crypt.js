@@ -41,16 +41,40 @@ function main(){
     }
 }
 
-function vig(input, key, encrypt){
-    var alphLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    var alpUpper =  ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+function vig(input, key, encrypt) {
 
+    input = input.toUpperCase();
+    key = key.toUpperCase();
     var tmpString = "";
     var tmpValue;
-    var k = 0;
-    for(var i = 0; i < input.length; i++){
-
+    var k = [];
+    var j = 0; //key array index
+    for (var i = 0; i < key.length; i++){
+        var tmpK = key.charCodeAt(i);
+        if(isLowerCase(tmpK) || isUpperCase(tmpK)){
+            if(encrypt){
+                k[j] = key.charCodeAt(i) - 65;
+                j++;
+            }
+            else if(!encrypt){
+                k[j] = (26 - (key.charCodeAt(i) - 65)) % 26;
+                j++;
+            }
+        }
     }
+
+    j = 0;
+    for(var i = 0; i < input.length; i++){
+        var c = input.charCodeAt(i);
+
+        if(isUpperCase(c)){
+            c = c - 65;
+            tmpString += String.fromCharCode((c + k[j % k.length]) % 26 + 65);
+            j++;
+
+        }else tmpString += input.charAt(i);
+    }
+    return tmpString;
 }
 
 function eldF(input){
