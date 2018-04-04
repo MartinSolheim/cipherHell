@@ -33,8 +33,8 @@ function main() {
       else print("lol, something went wrong");
       break;
     case "MORSE":
-      if (mode === "en") print(morseEn(input, true));
-      else if (mode === "de") print(morseEn(input, false));
+      if (mode === "en") print(morseEn(input));
+      else if (mode === "de") print(morseDe(input));
       else print("something went wrong. fuck");
       break;
     case "PRINT":
@@ -45,93 +45,73 @@ function main() {
   }
 }
 
-function morseEn(input, encrypt) {
+function morseEn(input) {
   var morseLet = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."];
   var morseNum = ["-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."];
   var clearA = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   var tmpString = "";
-  if(encrypt) input = input.toLowerCase();
+  input = input.toLowerCase();
 
-  if(encrypt){
-    for (var i = 0; i < input.length; i++) {
-      if (input.charCodeAt(i) >= 97 && input.charCodeAt(i) < 122) tmpString += morseLet[input.charCodeAt(i) - 97] + " ";
-      else if (input.charCodeAt(i) >= 48 && input.charCodeAt(i) <= 57) tmpString += morseNum[input.charCodeAt(i) - 48] + " ";
-      else if (input.charCodeAt(i) === 32) tmpString += " ";
-    }
-  }else if(!encrypt) {
-    var tmpVal = "";
-    for (var i = 0; i < input.length; i++) {
-      if(input.charCodeAt(i) === 32 && input.charCodeAt(i-1) === 32){
-        tmpString += " ";
-        tmpVal = "";
-        i++;
-      }
-      else{
-        for(var j = 0; j < 5; j++){
-          if(input.charCodeAt(i+j) === 32){
-            for(var x = 0; x < morseLet.length; x++){
-              if (tmpVal === morseLet[x]){
-                tmpString += clearA[x];
-                i = i + j;
-                tmpVal = "";
-                j = x = morseLet.length;
-              }
-              else if (tmpVal === morseNum[x]){
-                tmpString += x - 48;
-                i = i + j;
-                tmpVal = "";
-                j = x = morseLet.length;
-              }
-            }
-          }else{
-            tmpVal += input.charAt(i+j);
-          }
-        }
-      }
-
-    }
+  for (var i = 0; i <= input.length; i++) {
+    if (input.charCodeAt(i) >= 97 && input.charCodeAt(i) <= 122) tmpString += morseLet[input.charCodeAt(i) - 97] + " ";
+    else if (input.charCodeAt(i) >= 48 && input.charCodeAt(i) <= 57) tmpString += morseNum[input.charCodeAt(i) - 48] + " ";
+    else if (input.charCodeAt(i) === 32) tmpString += " ";
   }
 
-
-
-  /*
-  for (var i = 0; i < input.length; i++) {
-      for(var j = 0; j < 5; j++){
-        if(input.charCodeAt(j) === 32){
-          for(var x = 0; x < morseLet.length; x++){
-            if (tmpVal === morseLet[x]){
-              tmpString += clearA[x];
-              i = i + j;
-              tmpVal = "";
-              break;
-            }
-            else if (tmpVal === morseNum[x]){
-              tmpString += x - 48;
-              i = i + j;
-              tmpVal = "";
-              break;
-            }
-          }
-
-        }else tmpVal += input.charAt(j);
-      }
-    }
-   */
   return tmpString;
 }
 
-function morseDe(input, morseLet, morseNum){
-  var tmpV = "";
-  for(var i = 0; i < 6; i++){
-    if(input.charCodeAt(i) !== 32){
-      tmpV += input.charCodeAt(i);
-    }else{
-      for(var j = 0; j < morseLet.length; j++){
-        if(tmpV === morseLet[j]) return morseLet[j];
-        else if(tmpV === morseNum[j]) return morseNum[j];
+function morseDe(input) {
+  var morseLet = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."];
+  var morseNum = ["-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----."];
+  var clearA = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+  var tmpString = "";
+  var tmpVal = "";
+  for (var i = 0; i < input.length; i++) {
+
+    //if there are two white spaces, it adds a white space to the clear text
+    if (input.charCodeAt(i) === 32 && input.charCodeAt(i - 1) === 32) {
+      tmpString += " ";
+      tmpVal = "";
+    }
+
+    else {
+
+      //fills a temp string with a morse character
+      for (var j = 0; j <= 5; j++) {
+
+        //stops at a white space
+        if (input.charCodeAt(i + j) === 32) {
+
+          //if length less than 5, the morse char is a letter
+          if (j < 5) {
+            for (var y = 0; y <= morseLet.length; y++) {
+              if (tmpVal === morseLet[y]) {
+                tmpString += clearA[y];
+                i = i + j;
+                tmpVal = "";
+                j = y = 100;
+              }
+            }
+
+            //if it is 5, then its a number
+          } else if (j === 5) {
+            for (var x = 0; x < morseNum.length; x++) {
+              if (tmpVal === morseNum[x]) {
+                tmpString += x;
+                i = i + j;
+                tmpVal = "";
+                j = x = 100;
+              }
+            }
+          }
+        } else {
+          tmpVal += input.charAt(i + j);
+        }
       }
     }
   }
+  return tmpString;
 }
 
 function vig(input, key, encrypt) {
