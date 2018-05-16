@@ -35,16 +35,22 @@ body{
 }
 
 .content{
-    position: relative;
+    #margin: 2% 5% 2% 5%;
     margin: auto;
-    padding: 10px;
-    width: 500px;
+    width: 95%;
     z-index: 5;
 }
 
 .content:after{
     background-color: white;
     opacity: 0.6;
+}
+
+#inputBox, #output{
+    width: 45%;
+    height: 40%;
+    text-align: left;
+    font-size: 2em;
 }
 
 

@@ -6,8 +6,10 @@ function main() {
   var algType = document.getElementById("selectAlgType").value;
   var x;
   var audio = document.getElementById("audio");
-  var mode = document.getElementById("mode").value;
+  var mode = document.getElementById("mode");
   document.getElementById("infoBox").style.display = "none";
+  var morseShort = document.getElementById("morseShort");
+  var morseLong = document.getElementById("morseLong");
 
   switch (algType) {
     case "ROT13":
@@ -344,6 +346,14 @@ function isUpperCase(c) {
   else return false;
 }
 
+function arraysAreEqual( array1, array2){
+  if(array1.length !== array2.length) return false;
+  for(var i = 0; i < array1.length; i++) {
+    if(array1[i] !== array2[i]) return false;
+  }
+  return true;
+}
+
 function isLowerCase(c) {
   if (c >= 97 && c <= 122) return true;
   else return false;
@@ -380,3 +390,24 @@ function pause() {
 function print(input) {
   document.getElementById("output").innerHTML = input;
 }
+
+function morsePlay(i){
+  var text = document.getElementById("output").innerHTML;
+  if(text.charAt(i) === ".") morseShort.play();
+  else if(text.charAt(i) === "-") morseLong.play();
+
+  if(i !== text.length) window.setTimeout(morsePlay(i+1), 1000);
+}
+
+function morseStop() {
+  morseLong.stop();
+}
+
+/*
+for(var i = 0; i <= text.length; i++){
+    if(text.charAt(i) === ".") morseShort.play();
+    else if(text.charAt(i) === "-") morseLong.play();
+
+    window.setTimeout(500);
+  }
+ */

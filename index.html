@@ -11,6 +11,8 @@
 </head>
 <body>
 <audio id="audio" src="resources/looperDrone.mp3" ></audio>
+<audio id="morseShort" src="resources/morseShort.wav" ></audio>
+<audio id="morseLong" src="resources/morseLong.wav" ></audio>
 <div class="contentBefore" id="contentBefore"></div>
 <div class="content">
     <h1>CipherHell</h1>
@@ -22,15 +24,26 @@
         <input type="text" name="key">
         <br>
         <p>Input</p>
-        <textarea name="input" rows="5" cols="50" onkeypress="return enterPress(event)"></textarea>
+
+        <div>
+            <textarea id="inputBox" name="input" rows="5" cols="50" onkeypress="return enterPress(event)"></textarea>
+            <textarea readonly id="output" rows="5" cols="50">Output </textarea>
+        </div>
+
     </form>
     <br>
 
-    <select id="mode">
-        <option value="en">Encipher</option>
-        <option value="de">Decipher</option>
-    </select>
+    <h3>
+        Mode
+    </h3>
+    <  <i id="mode">
+        <input type="radio" name="mode" value="en" checked> Encipher
+        <input type="radio" name="mode" value="de">Decipher
+    </form>
     <br>
+    <h3>
+        Cipher type
+    </h3>
     <select id="selectAlgType">
         <option value="MORSE">International morse code</option>
         <option value="ROT13">ROT13</option>
@@ -47,13 +60,17 @@
     <button onclick="main()">Submit</button>
     <p id="infoBox"></p>
     <br><br>
-    <textarea readonly id="output" rows="5" cols="50"> </textarea>
+
     <br>
     <button onclick="copy()">Copy to clipboard</button>
     <br><br>
     <div id="music">
         <input type="button" value="feels" onclick="play()">
         <input type="button" value="no feels" onclick="pause()">
+    </div>
+    <div id="morseAudio">
+        <input type="button" value="play" onclick="morsePlay(1)">
+        <input type="button" value="stop" onclick="">
     </div>
 
 </div>
