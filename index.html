@@ -10,10 +10,33 @@
 
 </head>
 <body>
-<audio id="audio" src="resources/looperDrone.mp3" ></audio>
-<audio id="morseShort" src="resources/morseShort.wav" ></audio>
-<audio id="morseLong" src="resources/morseLong.wav" ></audio>
+<audio id="audio" src="resources/looperDrone.mp3"></audio>
+<audio id="morseShort" src="resources/morseShort.wav"></audio>
+<audio id="morseLong" src="resources/morseLong.wav"></audio>
 <div class="contentBefore" id="contentBefore"></div>
+<div class="sideMenu">
+    <h3>
+        Cipher type
+    </h3>
+    <div id="menuList">
+        <input id="morse" name="menuList" class="radio" type="radio" value="MORSE" checked>
+        <label for="morse">Morse</label>
+        <input id="rot13" name="menuList" class="radio" type="radio" value="ROT13">
+        <label for="rot13">ROT13</label>
+        <input id="rotn" name="menuList" class="radio" type="radio" value="ROTN">
+        <label for="rotn">ROT N</label>
+        <input id="vig" name="menuList" class="radio" type="radio" value="VIG">
+        <label for="vig">Vigenére</label>
+        <input id="eldFuth" name="menuList" class="radio" type="radio" value="ELDFUTHARK">
+        <label for="eldFuth">Elder Futhark</label>
+        <input id="fullwidth" name="menuList" class="radio" type="radio" value="FULLWIDTH">
+        <label for="fullwidth">Fullwidth</label>
+        <input id="print" name="menuList" class="raido" type="radio" value="PRINT">
+        <label for="print">PRINT</label>
+    </div>
+
+
+</div>
 <div class="content">
     <h1>CipherHell</h1>
     <p></p>
@@ -23,11 +46,11 @@
         <p>Key / Rotation number</p>
         <input type="text" name="key">
         <br>
-        <p>Input</p>
 
         <div>
-            <textarea id="inputBox" name="input" rows="5" cols="50" onkeypress="return enterPress(event)"></textarea>
-            <textarea readonly id="output" rows="5" cols="50">Output </textarea>
+            <textarea autofocus placeholder="Input" id="inputBox" name="input" rows="5" cols="50"
+                      onkeypress="return enterPress(event)"></textarea>
+            <textarea placeholder="Output" readonly id="output" rows="5" cols="50"></textarea>
         </div>
 
     </form>
@@ -36,14 +59,14 @@
     <h3>
         Mode
     </h3>
-    <  <i id="mode">
-        <input type="radio" name="mode" value="en" checked> Encipher
-        <input type="radio" name="mode" value="de">Decipher
-    </form>
+    <div id="modeDiv">
+        <input id="modeEn" class="radio" type="radio" name="mode" value="en" checked>
+        <label for="modeEn">Encipher</label>
+        <input id="modeDe" class="radio" type="radio" name="mode" value="de">
+        <label for="modeDe">Decipher</label>
+    </div>
     <br>
-    <h3>
-        Cipher type
-    </h3>
+<!--
     <select id="selectAlgType">
         <option value="MORSE">International morse code</option>
         <option value="ROT13">ROT13</option>
@@ -54,8 +77,7 @@
         <option value="PRINT">Print</option>
     </select>
     <br><br>
-
-
+-->
 
     <button onclick="main()">Submit</button>
     <p id="infoBox"></p>

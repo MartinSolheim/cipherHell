@@ -3,10 +3,10 @@ function main() {
   var a = document.getElementById("inForm");
   var key = a.elements[0].value;
   var input = a.elements[1].value;
-  var algType = document.getElementById("selectAlgType").value;
+  var algType = document.querySelector('input[name=menuList]:checked').value;
   var x;
   var audio = document.getElementById("audio");
-  var mode = document.getElementById("mode");
+  var mode = document.querySelector('input[name=mode]:checked').value;
   document.getElementById("infoBox").style.display = "none";
   var morseShort = document.getElementById("morseShort");
   var morseLong = document.getElementById("morseLong");
