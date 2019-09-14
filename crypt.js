@@ -333,8 +333,8 @@ function fullWDe(input) {
   var tmpString = "";
 
   for (var i = 0; i < input.length; i++) {
-    tmpString += String.fromCharCode(input.charCodeAt(i) - 65248);
-
+    if(input.charAt(i) !== " ") tmpString += String.fromCharCode(input.charCodeAt(i) - 65248);
+    else tmpString += " ";
   }
   return tmpString;
 }
