@@ -37,12 +37,56 @@ function main() {
       else if (mode === "de") print(morseDe(input));
       else print("something went wrong. fuck");
       break;
+    case "ROVER":
+      if (mode === "en") print(roverEn(input));
+      else print(roverDe(input));
+      break;
     case "PRINT":
       print(input);
       break;
     default:
       print("something went wrong :( ");
   }
+}
+
+function roverEn(input){
+  //Norwegian vovels
+  let vovels = ["a", "e", "i", "o", "u", "u", "y", "æ", "ø", "å"];
+  let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"];
+
+  let out = "";
+  let tmp = "";
+  for (let i = 0; i <= input.length; i++){
+    if(consonants.includes(input.charAt(i))){
+      tmp = (input.charAt(i) + "o" + input.charAt(i));
+      out += tmp;
+    }
+    else if(vovels.includes(input.charAt(i))) out += input.charAt(i);
+    else {
+      out += input.charAt(i);
+    }
+  }
+  return out;
+}
+
+function roverDe(input){
+  //Norwegian vovels
+  let vovels = ["a", "e", "i", "o", "u", "u", "y", "æ", "ø", "å"];
+  let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"];
+
+  let out = "";
+  let tmp = "";
+  for (let i = 0; i <= input.length; i++){
+    if(consonants.includes(input.charAt(i))){
+      out += input.charAt(i);
+      i += 2;
+    }
+    else if(vovels.includes(input.charAt(i))) out += input.charAt(i);
+    else {
+      out += input.charAt(i);
+    }
+  }
+  return out;
 }
 
 function morseEn(input) {
