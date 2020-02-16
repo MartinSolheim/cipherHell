@@ -50,18 +50,19 @@ function main() {
 }
 
 function roverEn(input){
-  //Norwegian vovels
-  let vovels = ["a", "e", "i", "o", "u", "u", "y", "æ", "ø", "å"];
+  //Norwegian vowels
+  let vowels = ["a", "e", "i", "o", "u", "u", "y", "æ", "ø", "å"];
   let consonants = ["b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z"];
 
   let out = "";
   let tmp = "";
+
   for (let i = 0; i <= input.length; i++){
-    if(consonants.includes(input.charAt(i))){
-      tmp = (input.charAt(i) + "o" + input.charAt(i));
+    if(consonants.includes(input.toLowerCase().charAt(i))){
+      tmp = (input.charAt(i) + "o" + input.charAt(i).toLowerCase());
       out += tmp;
     }
-    else if(vovels.includes(input.charAt(i))) out += input.charAt(i);
+    else if(vowels.includes(input.charAt(i).toLowerCase())) out += input.charAt(i);
     else {
       out += input.charAt(i);
     }
@@ -77,11 +78,11 @@ function roverDe(input){
   let out = "";
   let tmp = "";
   for (let i = 0; i <= input.length; i++){
-    if(consonants.includes(input.charAt(i))){
+    if(consonants.includes(input.charAt(i).toLowerCase())){
       out += input.charAt(i);
       i += 2;
     }
-    else if(vovels.includes(input.charAt(i))) out += input.charAt(i);
+    else if(vovels.includes(input.charAt(i).toLowerCase())) out += input.charAt(i);
     else {
       out += input.charAt(i);
     }
