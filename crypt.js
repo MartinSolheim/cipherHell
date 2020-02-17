@@ -1,8 +1,8 @@
 function main() {
 
   var a = document.getElementById("inForm");
-  var key = a.elements[0].value;
-  var input = a.elements[1].value;
+  var key = document.getElementById("keyForm").value;
+  var input = document.getElementById("inputForm").value;
   var algType = document.getElementById("selectAlgType").value;
   var x;
   var audio = document.getElementById("audio");

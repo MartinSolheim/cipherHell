@@ -2,62 +2,104 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>cipherHell</title>
     <link rel="stylesheet" href="cryptStyle.css">
-    <script src="crypt.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel=" shortcut icon" href="./resources/logo.png">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="crypt.js"></script>
+    <!--<link rel=" shortcut icon" href="./resources/logo.png"> -->
 </head>
+
 <body>
-<audio id="audio" src="resources/looperDrone.mp3" ></audio>
+<audio id="audio" src="resources/looperDrone.mp3"></audio>
 <div class="contentBefore" id="contentBefore"></div>
-<div class="content">
-    <h1>CipherHell</h1>
+
+<!--<div class="content"> -->
+<div class="container-md">
+    <h1>./CipherHell</h1>
     <p></p>
     <br>
 
-    <form class="form" id="inForm">
-        <p>Key / Rotation number</p>
-        <input type="text" name="key">
-        <br>
-        <p>Input</p>
-        <textarea name="input" rows="5" cols="50" onkeypress="return enterPress(event)"></textarea>
+    <form id="inForm">
+        <div class="form-group" id="inFormK">
+            <!--<label for="keyForm">Key / Rotation number</label>-->
+            <input placeholder="Key / Rotation number" type="text" class="form-control" id="keyForm" name="key">
+        </div>
+
+        <div class="form-group" id="inFormI">
+            <!--<label for="inputForm">Input</label>-->
+            <textarea placeholder="Input" class="form-control" id="inputForm" name="input" rows="3"
+                      onkeypress="return enterPress(event)"></textarea>
+        </div>
     </form>
     <br>
 
-    <select id="mode">
-        <option value="en">Encipher</option>
-        <option value="de">Decipher</option>
-    </select>
-    <br>
-    <select id="selectAlgType">
-        <option value="MORSE">International morse code</option>
-        <option value="ROT13">ROT13</option>
-        <option value="ROTN">ROT N</option>
-        <option value="VIG">Vigenére cipher</option>
-        <option value="ELDFUTHARK">Elder Futhark</option>
-        <option value="FULLWIDTH">ａｅｓｔｈｅｔｉｃ</option>
-        <option value="ROVER">RøverSpråk</option>
-        <option value="PRINT">Print</option>
-    </select>
-    <br><br>
+    <div class="form-inline">
+        <div class="form-group mb2">
+            <!--<label for="mode">Encipher/Decipher</label>-->
+            <!--
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="en" checked> Encipher
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="de"> Decipher
+            </label>
+            -->
 
 
-
-    <button onclick="main()">Submit</button>
-    <p id="infoBox"></p>
-    <br><br>
-    <textarea readonly id="output" rows="5" cols="50"> </textarea>
-    <br>
-    <button onclick="copy()">Copy to clipboard</button>
-    <br><br>
-    <div id="music">
-        <input type="button" value="feels" onclick="play()">
-        <input type="button" value="no feels" onclick="pause()">
+            <select class="form-control" id="mode">
+                <option value="en">Encipher</option>
+                <option value="de">Decipher</option>
+            </select>
+        </div>
+        <div class="form-group mb3">
+            <select class="form-control" id="selectAlgType">
+                <option value="MORSE">International morse code</option>
+                <option value="ROT13">ROT13</option>
+                <option value="ROTN">ROT N</option>
+                <option value="VIG">Vigenére cipher</option>
+                <option value="ELDFUTHARK">Elder Futhark</option>
+                <option value="FULLWIDTH">ａｅｓｔｈｅｔｉｃ</option>
+                <option value="ROVER">RøverSpråk</option>
+                <option value="PRINT">Print</option>
+            </select>
+        </div>
     </div>
 
+    <br>
+    <div class="btn-group-toggle">
+        <label class="class btn btn-secondary">
+            <input type="checkbox" onclick="main()">Submit
+        </label>
+    </div>
+
+
+    <p id="infoBox"></p>
+
+    <br>
+    <div class="form-group">
+        <textarea class="form-control" readonly id="output" rows="3"></textarea>
+    </div>
+    <div class="btn-group-toggle">
+        <label class="btn btn-secondary">
+            <input type="checkbox" onclick="copy()">Copy to clipboard</input>
+        </label>
+    </div>
+    <br><br>
+    <div class="btn-group-toggle" id="music">
+        <label class="btn btn-secondary">
+            <input type="checkbox" value="feels" onclick="play()"> Feels
+        </label>
+        <label class="btn btn-secondary">
+            <input type="checkbox" value="no feels" onclick="pause()"> No feels
+        </label>
+    </div>
 </div>
+
+<!--</div>-->
 
 
 </body>
